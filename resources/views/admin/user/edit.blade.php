@@ -16,6 +16,13 @@
                     <input type="hidden" name="id" value="{{ $user->id }}">
                     <div class="tile-body">
                         <div class="form-group">
+                            <label class="control-label" for="pkms_no">PKMS NO <span class="m-l-5 text-danger"> *</span></label>
+                            <input class="form-control @error('pkms_no') is-invalid @enderror" type="text" name="pkms_no" id="pkms_no" value="{{$user->pkms_no }}"/>
+                            @error('pkms_no') {{ $message ?? '' }} @enderror
+                        </div>
+                    </div>
+                    <div class="tile-body">
+                        <div class="form-group">
                             <label class="control-label" for="abvp_no">ABVP NO</label>
                             <input class="form-control @error('abvp_no') is-invalid @enderror" type="text" name="abvp_no" id="abvp_no" value="{{$user->abvp_no }}"/>
                             @error('abvp_no') {{ $message ?? '' }} @enderror

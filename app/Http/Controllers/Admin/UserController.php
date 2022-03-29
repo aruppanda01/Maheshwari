@@ -46,6 +46,7 @@ class UserController extends BaseController
         $this->validate(
             $request,
             [
+                'pkms_no' => 'required|max:255',
                 'abvp_no' => 'nullable|max:255',
                 'member_name' => 'required|max:255',
                 'father_or_husband_name' => 'required|max:255',
@@ -63,6 +64,7 @@ class UserController extends BaseController
                 'password' => 'required',
             ],
             [
+                'pkms_no.required' => 'This field is required',
                 'member_name.required' => 'This field is required',
                 'father_or_husband_name.required' => 'This field is required',
                 'gender.required' => 'This field is required',
@@ -79,6 +81,7 @@ class UserController extends BaseController
 
         $user = new User();
         $user->abvp_no = $request->abvp_no;
+        $user->pkms_no = $request->pkms_no;
         $user->member_name = $request->member_name;
         $user->father_or_husband_name = $request->father_or_husband_name;
         $user->gender = $request->gender;
@@ -149,6 +152,7 @@ class UserController extends BaseController
             $request,
             [
                 'abvp_no' => 'nullable|max:255',
+                'pkms_no' => 'required|max:255',
                 'member_name' => 'required|max:255',
                 'father_or_husband_name' => 'required|max:255',
                 'gender' => 'required',
@@ -165,6 +169,7 @@ class UserController extends BaseController
                 // 'password' => 'required',
             ],
             [
+                'pkms_no.required' => 'This field is required',
                 'member_name.required' => 'This field is required',
                 'father_or_husband_name.required' => 'This field is required',
                 'gender.required' => 'This field is required',
@@ -181,6 +186,7 @@ class UserController extends BaseController
 
         // dd($request->all());
         $user =  User::find($id);
+        $user->pkms_no = $request->pkms_no;
         $user->abvp_no = $request->abvp_no;
         $user->member_name = $request->member_name;
         $user->father_or_husband_name = $request->father_or_husband_name;

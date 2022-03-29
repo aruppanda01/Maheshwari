@@ -33,8 +33,8 @@
                         <tbody>
                             @foreach($users as $key => $user)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{ $user->abvp_no }}</td>
+                                    <td>{{ $user->pkms_no }}</td>
+                                    <td>{{ $user->abvp_no ? $user->abvp_no : 'N/A' }}</td>
                                     <td>{{ $user->member_name }}</td>
                                     <td>{{ $user->father_or_husband_name }}</td>
                                     <td>{{ $user->gender }}</td>
