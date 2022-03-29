@@ -38,7 +38,7 @@
                                     <td>{{ $user->member_name }}</td>
                                     <td>{{ $user->father_or_husband_name }}</td>
                                     <td>{{ $user->gender }}</td>
-                                    <td>{{ date('d-M-Y',strtotime($user->dob)) }}</td>
+                                    <td>{{ $user->dob ? date('d-M-Y',strtotime($user->dob)) : 'N/A' }}</td>
                                     <td class="text-center">
                                         <div class="toggle-button-cover margin-auto">
                                             <div class="button-cover">
