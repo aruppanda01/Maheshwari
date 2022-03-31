@@ -31,6 +31,10 @@ Route::get('/user/details/{id}', [App\Http\Controllers\Api\UserController::class
 Route::post('/user/update', [App\Http\Controllers\Api\UserController::class, 'update']);
 Route::post('/user/change-password', [App\Http\Controllers\Api\UserController::class, 'changePassword']);
 
+// ----------------Updates------------------
+Route::get('/updates', [App\Http\Controllers\Api\UpdatesController::class, 'index']);
+Route::post('/updates/store', [App\Http\Controllers\Api\UpdatesController::class, 'store']);
+
 // ----------------Banner--------------------
 
 Route::get('/banner', [App\Http\Controllers\Api\BannerController::class, 'index']);
@@ -70,3 +74,25 @@ Route::post('/team/delete/{id}', [App\Http\Controllers\Api\TeamController::class
 // ------------------Event-------------------------
 
 Route::get('/event/list', [App\Http\Controllers\Api\EventController::class, 'index']);
+Route::post('/event/store', [App\Http\Controllers\Api\EventController::class, 'store']);
+
+
+// -----------------Category-----------------------
+Route::get('/category/list', [App\Http\Controllers\Api\CategoryController::class, 'index']);
+Route::post('/category/store', [App\Http\Controllers\Api\CategoryController::class, 'store']);
+
+// -----------------Photos------------------------
+Route::get('/photo/list/{categoryId}', [App\Http\Controllers\Api\PhotosController::class, 'index']);
+Route::post('/photo/store', [App\Http\Controllers\Api\PhotosController::class, 'store']);
+
+// -----------------Governing Bodies---------------
+Route::get('/governing/list', [App\Http\Controllers\Api\GoverningController::class, 'index']);
+Route::post('/governing/store', [App\Http\Controllers\Api\GoverningController::class, 'store']);
+
+// ------------------Prayer-------------------------
+Route::get('/prayer/list', [App\Http\Controllers\Api\PrayerController::class, 'index']);
+Route::post('/prayer/store', [App\Http\Controllers\Api\PrayerController::class, 'store']);
+
+// ----------------Download--------------------------
+Route::get('/document/list', [App\Http\Controllers\Api\DocumentController::class, 'index']);
+Route::post('/document/store', [App\Http\Controllers\Api\DocumentController::class, 'store']);

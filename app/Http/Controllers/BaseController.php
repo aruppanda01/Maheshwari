@@ -97,7 +97,8 @@ class BaseController extends Controller
     public function sendError($error, $errorMessages = [], $code = 404)
     {
         $response = [
-            'success' => false,
+            'status' => 400,
+            'error' => true,
             'message' => $error,
         ];
 

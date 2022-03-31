@@ -14,7 +14,7 @@ class AddPmksColInUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('pkms_no')->after('id');
+            $table->string('pkms_no')->after('id')->nullable();
         });
     }
 
