@@ -74,6 +74,7 @@ Route::post('/team/delete/{id}', [App\Http\Controllers\Api\TeamController::class
 // ------------------Event-------------------------
 
 Route::get('/event/list', [App\Http\Controllers\Api\EventController::class, 'index']);
+Route::get('/event/details/{eventId}', [App\Http\Controllers\Api\EventController::class, 'show']);
 Route::post('/event/store', [App\Http\Controllers\Api\EventController::class, 'store']);
 
 

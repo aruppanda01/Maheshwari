@@ -47,8 +47,7 @@ class UserController extends BaseController
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'memberName' => 'required',
-            'email' => 'required|email|unique:users',
+            'mobile_no' => 'required',
             'password' => 'required',
         ]);
 
@@ -56,42 +55,57 @@ class UserController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        $existing_user_details = User::where('mobile_mo',$request->mobile_no)->first();
+        if (!$existing_user_details) {
+            return $this->sendError('Validation Error.','Mobile no does not match');
+        }
 
-        $memberName = $request->memberName;
-        $email    = $request->email;
+        if ($existing_user_details->status == 1) {
+            return $this->sendError('Validation Error.','Already registered');
+        }
         $password = $request->password;
 
-        $user = new User();
-        $user->member_name = $memberName;
-        $user->email = $email;
-        $user->password = $password;
-        $user->save();
+        $existing_user_details->password = Hash::make($password);
+        $existing_user_details->status = 1;
+        $existing_user_details->save();
         return response()->json([
             "status" => 200,
             "message" => "Registration Successful",
-            "data" => $user,
+            "data" => $existing_user_details,
         ]);
     }
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
+        $validator = Validator::make($request->all(), [
+            'mobile_no' => 'required',
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        $existing_user_details = User::where('mobile_mo',$request->mobile_no)->first();
+        if (!$existing_user_details) {
+            return $this->sendError('Validation Error.','Mobile no does not match');
+        }
+
+        if ($existing_user_details->status == 0) {
+            return $this->sendError('Validation Error.','Does not register yet');
+        }
+
+        if (Auth::attempt(['mobile_mo' => $request->mobile_no, 'password' => $request->password])) {
             $user = Auth::user();
             $success['name'] =  $user->name;
             return response()->json([
                 "status" => 200,
-                "message" => "Login Succesfull",
+                "message" => "Login Successful",
                 "data" => $user,
             ]);
         }
         return response()->json([
             "status" => 400,
-            "message" => "Unauthorised",
+            "message" => "Unauthorized",
         ]);
     }
 
@@ -154,6 +168,7 @@ class UserController extends BaseController
             'father_or_husband_name' => 'nullable|max:255',
             'gender' => 'nullable|max:255',
             'dob' => 'nullable|date',
+            'ma' => 'nullable|max:255',
             'aadhar_no' => 'nullable|max:255',
             'qualification' => 'nullable|max:255',
             'blood_group' => 'nullable|max:255',
@@ -222,9 +237,12 @@ class UserController extends BaseController
                 if ($request->mobile_no) {
                     $user_details->mobile_mo = $request->mobile_no;
                 }
-                if ($request->image) {
-                    $user_details->image = imageUpload($request->image, 'profile_pic');
+                if ($request->mobile_mo) {
+                    $user_details->mobile_mo = $request->mobile_mo;
                 }
+                // if ($request->image) {
+                //     $user_details->image = imageUpload($request->image, 'profile_pic');
+                // }
                 $user_details->save();
                 if ($user_details) {
                     return response()->json(['status' => 200, 'message' => 'Profile updated successfully', 'data' => $user_details]);

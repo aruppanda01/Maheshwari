@@ -59,9 +59,8 @@ class UserController extends BaseController
                 'address' => 'required|max:255',
                 'city' => 'required|max:255',
                 'pin_code' => 'required|max:255',
-                'email' => 'nullable|unique:users',
-                'mobile_mo' => 'nullable|digits:10',
-                'password' => 'required',
+                'email' => 'nullable',
+                'mobile_mo' => 'nullable|digits:10|unique:users',
             ],
             [
                 'pkms_no.required' => 'This field is required',
@@ -75,7 +74,8 @@ class UserController extends BaseController
                 'pin_code.required' => 'This field is required',
                 // 'email.required' => 'This field is required',
                 'password.required' => 'This field is required',
-
+                'mobile_mo.digits' => 'Please enter 10 digits mobile no',
+                'mobile_mo.unique' => 'Already exist',
             ]
         );
 
@@ -95,7 +95,7 @@ class UserController extends BaseController
         $user->pin_code = $request->pin_code;
         $user->email = $request->email;
         $user->mobile_mo = $request->mobile_mo;
-        $user->password = Hash::make($request->password);
+        $user->status = 0;
         $user->save();
 
         return $this->responseRedirect('admin.user.index', 'User has been created successfully', 'success', false, false);

@@ -101,8 +101,8 @@ class EventController extends BaseController
 
         return response()->json([
             "status" => 200,
-            "data" => $data,
             "message" => "Event Details",
+            "data" => $data,
         ]);
     }
 
