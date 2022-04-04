@@ -9,6 +9,19 @@ use App\Http\Controllers\BaseController;
 
 class ImageController extends BaseController
 {
+    function randomGenerator()
+    {
+        return uniqid() . '' . date('ymdhis') . '' . uniqid();
+    }
+
+    function imageUpload($image, $folder = 'image')
+    {
+        $random = $this->randomGenerator();
+        $image->move('upload/' . $folder . '/', $random . '.' . $image->getClientOriginalExtension());
+        $imageurl = 'upload/' . $folder . '/' . $random . '.' . $image->getClientOriginalExtension();
+        // dd($imageurl);
+        return $imageurl;
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -23,6 +36,11 @@ class ImageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        return imageUpload($request->image, 'image');
+        $imageUrl =  $this->imageUpload($request->image, 'image');
+        return response()->json([
+            "status" => 200,
+            "message" => "Image upload successful",
+            "data" => $imageUrl,
+        ]);
     }
 }
