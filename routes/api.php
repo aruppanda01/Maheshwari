@@ -97,3 +97,7 @@ Route::post('/prayer/store', [App\Http\Controllers\Api\PrayerController::class, 
 // ----------------Download--------------------------
 Route::get('/document/list', [App\Http\Controllers\Api\DocumentController::class, 'index']);
 Route::post('/document/store', [App\Http\Controllers\Api\DocumentController::class, 'store']);
+
+
+// -----------------Image Upload----------------------
+Route::post('/image/upload', [App\Http\Controllers\Api\ImageController::class, 'store']);
