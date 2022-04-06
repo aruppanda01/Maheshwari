@@ -68,6 +68,8 @@ class UserController extends BaseController
         $existing_user_details->password = Hash::make($password);
         $existing_user_details->status = 1;
         $existing_user_details->save();
+
+        createNotification($existing_user_details->id,'registration_success');
         return response()->json([
             "status" => 200,
             "message" => "Registration Successful",

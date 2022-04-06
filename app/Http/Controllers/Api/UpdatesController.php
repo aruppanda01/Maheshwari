@@ -100,26 +100,27 @@ class UpdatesController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'userId' => 'required',
-            'name' => 'required',
-            'email' => 'required|unique:teams',
-            'phone' => 'required|digits:10|integer|unique:teams',
+        $validator = Validator::make($request->all(), [
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        
+        $Update = Update::find($id);
 
-        // dd($request->all());
-        $team = Team::find($id);
+        if($request->hasFile('image')){
+            $imageName = imageUpload($request->image, 'updates');
+        }else{
+            $imageName = $Update->file_path;
+        }
+        $Update->file_path = $imageName;
+        $Update->save();
 
-        $team->update([
-            'userId' => $request->userId,
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone
-        ]);
         return response()->json([
             "status" => 200,
-            "data" => $team,
-            "message" => "Team Update Successfull",
+            "data" => $Update,
+            "message" => "Image successfully updated",
         ]);
     }
 

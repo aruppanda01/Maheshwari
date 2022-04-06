@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     // return $request->user();
     // Route::post('storeBlog', 'Api\BlogController@store');
@@ -34,12 +31,14 @@ Route::post('/user/change-password', [App\Http\Controllers\Api\UserController::c
 // ----------------Updates------------------
 Route::get('/updates', [App\Http\Controllers\Api\UpdatesController::class, 'index']);
 Route::post('/updates/store', [App\Http\Controllers\Api\UpdatesController::class, 'store']);
+Route::post('/updates/update/{id}', [App\Http\Controllers\Api\UpdatesController::class, 'update']);
 
 // ------------------Event-------------------------
 
 Route::get('/event/list', [App\Http\Controllers\Api\EventController::class, 'index']);
 Route::get('/event/details/{eventId}', [App\Http\Controllers\Api\EventController::class, 'show']);
 Route::post('/event/store', [App\Http\Controllers\Api\EventController::class, 'store']);
+Route::post('/event/update/{id}', [App\Http\Controllers\Api\EventController::class, 'update']);
 
 
 // -----------------Category-----------------------

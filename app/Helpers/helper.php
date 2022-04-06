@@ -25,6 +25,10 @@ function createNotification($user,$type)
 			$title = 'Profile updated';
 			$message = 'Profile update successfully';
 			break;
+        case 'registration_success':
+                $title = 'Registration successfully';
+                $message = 'You have successfully registered';
+                break;
 	}
 	$notification = [];
     $notification[] = [

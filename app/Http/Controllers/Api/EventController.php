@@ -126,6 +126,28 @@ class EventController extends BaseController
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        
+        $Update = Event::find($id);
+
+        if($request->hasFile('image')){
+            $imageName = imageUpload($request->image, 'updates');
+        }else{
+            $imageName = $Update->image;
+        }
+        $Update->image = $imageName;
+        $Update->save();
+
+        return response()->json([
+            "status" => 200,
+            "data" => $Update,
+            "message" => "Image successfully updated",
+        ]);
     }
 
     /**
