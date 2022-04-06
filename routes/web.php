@@ -23,6 +23,12 @@ Route::get('cache', function () {
     dd("Cache is cleared");
 });
 
+Route::get('/updateapp', function()
+{
+    \Artisan::call('dump-autoload');
+    echo 'dump-autoload complete';
+});
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['guest:admin'])->group(function () {

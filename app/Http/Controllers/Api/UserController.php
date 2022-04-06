@@ -182,7 +182,7 @@ class UserController extends BaseController
 
         // validation check
         if ($validator->fails()) {
-            return response()->json(['status' => 400, 'message' => 'Something happened', 'data' => $validator->errors()->first()]);
+            return response()->json(['status' => 400, 'message' => 'Validation error', 'data' => $validator->errors()->first()]);
         } else {
             // error handling
             try {
