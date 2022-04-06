@@ -28,12 +28,12 @@ class NotificationController extends BaseController
 
     public function userWiseNotification($id)
     {
-        $data = Notification::where('userId', $id)->get();
+        $data = Notification::where('user_id', $id)->where('read_flag',0)->get();
 
         return response()->json([
             "status" => 200,
-            "data" => $data,
             "message" => "Notification List",
+            "data" => $data,
         ]);
     }
 

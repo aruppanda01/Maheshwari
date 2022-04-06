@@ -161,21 +161,23 @@ class UserController extends BaseController
             'about_us' => 'nullable|max:255',
             'address' => 'nullable|max:255',
             'city' => 'nullable|max:255',
-            'pin_code' => 'nullable|max:255',
+            'pin_code' => 'nullable|digits:6',
             'mobile_mo' => 'nullable|digits:10',
             'pkms_no' => 'nullable|max:255',
             'abvp_no' => 'nullable|max:255',
             'father_or_husband_name' => 'nullable|max:255',
             'gender' => 'nullable|max:255',
             'dob' => 'nullable|date',
-            'ma' => 'nullable|max:255',
-            'aadhar_no' => 'nullable|max:255',
+            'ma' => 'nullable|date|max:255',
+            'aadhar_no' => 'nullable|digits:12',
             'qualification' => 'nullable|max:255',
-            'blood_group' => 'nullable|max:255',
+            'blood_group' => [
+                'nullable',
+                'in:O+,O-,A+,A-,B+,B-,AB-,AB+'
+            ],
             'relationship' => 'nullable|max:255',
             'occupation' => 'nullable|max:255',
             'occupation_sector' => 'nullable|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
         // validation check
@@ -188,9 +190,6 @@ class UserController extends BaseController
                 $user_details = User::find($request->id);
                 if ($request->member_name) {
                     $user_details->member_name = $request->member_name; 
-                }
-                if ($request->pkms_no) {
-                    $user_details->pkms_no = $request->pkms_no; 
                 }
                 if ($request->abvp_no) {
                     $user_details->abvp_no = $request->abvp_no; 
@@ -234,17 +233,9 @@ class UserController extends BaseController
                 if ($request->about_us) {
                     $user_details->about_us = $request->about_us;
                 }
-                if ($request->mobile_no) {
-                    $user_details->mobile_mo = $request->mobile_no;
-                }
-                if ($request->mobile_mo) {
-                    $user_details->mobile_mo = $request->mobile_mo;
-                }
-                // if ($request->image) {
-                //     $user_details->image = imageUpload($request->image, 'profile_pic');
-                // }
                 $user_details->save();
                 if ($user_details) {
+                    createNotification($request->id,'profile_update');
                     return response()->json(['status' => 200, 'message' => 'Profile updated successfully', 'data' => $user_details]);
                 } else {
                     return response()->json(['status' => 400, 'message' => 'Something happened', 'data' => 'Data update failure']);

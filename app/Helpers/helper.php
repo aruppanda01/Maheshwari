@@ -13,3 +13,30 @@ function imageUpload($image, $folder = 'image')
     // dd($imageurl);
     return $imageurl;
 }
+
+
+function createNotification($user,$type)
+{
+	$title = '';
+	$message = '';
+	$route = '';
+	switch ($type) {
+		case 'profile_update':
+			$title = 'Profile updated';
+			$message = 'Profile update successfully';
+			break;
+	}
+	$notification = [];
+    $notification[] = [
+        'user_id' => $user,
+        'type' => $type,
+        'title' => $title,
+        'message' => $message,
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s')
+    ];
+	if (count($notification) > 0) {
+		\App\Models\Notification::insert($notification);
+	}
+	return $notification;
+}
