@@ -25,8 +25,6 @@
                                 <th> Father/Husband Name </th>
                                 <th> SEX </th>
                                 <th>DOB</th>
-                                {{-- <th> Password </th> --}}
-                                <th> Status </th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -39,17 +37,6 @@
                                     <td>{{ $user->father_or_husband_name }}</td>
                                     <td>{{ $user->gender }}</td>
                                     <td>{{ $user->dob ? date('d-M-Y',strtotime($user->dob)) : 'N/A' }}</td>
-                                    <td class="text-center">
-                                        <div class="toggle-button-cover margin-auto">
-                                            <div class="button-cover">
-                                                <div class="button-togglr b2" id="button-11">
-                                                    <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-user_id="{{ $user['id'] }}" {{ $user['status'] == 1 ? 'checked' : '' }}>
-                                                    <div class="knobs"><span>Inactive</span></div>
-                                                    <div class="layer"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
                                     <td class="text-center">
                                     
                                         <div class="btn-group" role="group" aria-label="Second group">
