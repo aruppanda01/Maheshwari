@@ -23,13 +23,6 @@ Route::get('cache', function () {
     dd("Cache is cleared");
 });
 
-Route::get('/updateapp', function()
-{
-    \Artisan::call('dump-autoload');
-    echo 'dump-autoload complete';
-});
-
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['guest:admin'])->group(function () {
         Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
@@ -58,6 +51,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/user/delete/{id}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('user.delete');
         Route::post('/user/updateStatus', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
 
+        // ---------------Event---------------------
+        Route::get('/event', [App\Http\Controllers\Admin\EventController::class, 'index'])->name('event.index');
+        Route::get('/event/create', [App\Http\Controllers\Admin\EventController::class, 'create'])->name('event.create');
+        Route::post('/event/store', [App\Http\Controllers\Admin\EventController::class, 'store'])->name('event.store');
+        Route::get('/event/edit/{id}', [App\Http\Controllers\Admin\EventController::class, 'edit'])->name('event.edit');
+        Route::post('/event/update/{id}', [App\Http\Controllers\Admin\EventController::class, 'update'])->name('event.update');
     });
 
 });

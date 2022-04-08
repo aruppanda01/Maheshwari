@@ -12,6 +12,11 @@
                 <span class="app-menu__label">User</span>
             </a>
         </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/event*') ? 'active' : '' }}" href="{{ route('admin.event.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Events</span>
+            </a>
+        </li>
 
     </ul>
 </aside>

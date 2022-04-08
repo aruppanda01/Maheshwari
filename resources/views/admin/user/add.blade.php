@@ -92,7 +92,18 @@ User
                      <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="blood_group">Blood Group</label>
-                            <input class="form-control @error('blood_group') is-invalid @enderror" type="text" name="blood_group" id="blood_group" value="{{ old('blood_group') }}"/>
+                            <select name="blood_group" id="blood_group" class="form-control @error('blood_group') is-invalid @enderror">
+                                <option value="">Select blood group</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                            {{-- <input class="form-control @error('blood_group') is-invalid @enderror" type="text" name="blood_group" id="blood_group" value="{{ old('blood_group') }}"/> --}}
                             @error('blood_group') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
@@ -131,13 +142,13 @@ User
                             @error('email') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
-                     <div class="tile-body">
+                     {{-- <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="password">Password <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('password') is-invalid @enderror" type="text" name="password" id="password" value="{{ old('password') }}"/>
                             @error('password') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save User</button>
                         &nbsp;&nbsp;&nbsp;

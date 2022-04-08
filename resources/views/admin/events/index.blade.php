@@ -1,12 +1,12 @@
 @extends('admin.app')
-@section('title') User @endsection
+@section('title') Event @endsection
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-file"></i>User</h1>
-            <p>User List</p>
+            <h1><i class="fa fa-file"></i>Event</h1>
+            <p>Event List</p>
         </div>
-        <a href="{{ route('admin.user.create') }}" class="btn btn-primary pull-right">Add New</a>
+        <a href="{{ route('admin.event.create') }}" class="btn btn-primary pull-right">Add New</a>
     </div>
     @include('admin.partials.flash')
     <div class="row">
@@ -15,37 +15,40 @@
                 {{-- @if (Session::get('success'))
                     <div class="alert alert-success"> {{Session::get('success')}} </div>
                 @endif --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="tile-body">
                     <table class="table table-hover custom-data-table-style table-striped" id="sampleTable">
                         <thead>
                             <tr>
-                                <th>PKMS No.</th>
-                                <th> ABVP NO </th>
-                                <th> MEMB Name </th>
-                                <th> Father/Husband Name </th>
-                                <th> SEX </th>
-                                <th> DOB</th>
+                                <th>Sl No.</th>
+                                <th> Title </th>
+                                <th> Start date </th>
+                                <th> End date </th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $key => $user)
-                                <tr>
-                                    <td>{{ $user->pkms_no }}</td>
-                                    <td>{{ $user->abvp_no ? $user->abvp_no : 'N/A' }}</td>
-                                    <td>{{ $user->member_name }}</td>
-                                    <td>{{ $user->father_or_husband_name }}</td>
-                                    <td>{{ $user->gender }}</td>
-                                    <td>{{ $user->dob ? date('d-M-Y',strtotime($user->dob)) : 'N/A' }}</td>
+                            @foreach ($events as $key => $event)
+                               <tr>
+                                    <td>{{ $key +1  }}</td>
+                                    <td>{{ $event->title }}</td>
+                                    <td>{{ date('d-M-y',strtotime($event->start_date)) }}</td>
+                                    <td>{{ date('d-M-y',strtotime($event->end_date)) }}</td>
                                     <td class="text-center">
-                                    
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ url('admin/user/edit', $user['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('admin/event/edit', $event['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                             {{-- <a href="{{ route('admin.interest.details', $interest['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a> --}}
-                                             {{-- <a href="javascript: void(0)" data-id="{{$user['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a> --}}
+                                             <a href="javascript: void(0)" data-id="{{$event['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
-                                </tr>
+                               </tr>
                             @endforeach
                         </tbody>
                     </table>
