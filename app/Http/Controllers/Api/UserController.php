@@ -235,6 +235,9 @@ class UserController extends BaseController
                 if ($request->about_us) {
                     $user_details->about_us = $request->about_us;
                 }
+                if ($request->image) {
+                    $user_details->image = $request->image;
+                }
                 $user_details->save();
                 if ($user_details) {
                     createNotification($request->id,'profile_update');
