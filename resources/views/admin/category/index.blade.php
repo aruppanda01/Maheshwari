@@ -1,12 +1,12 @@
 @extends('admin.app')
-@section('title') Event @endsection
+@section('title') Category @endsection
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-file"></i>Event</h1>
-            <p>Event List</p>
+            <h1><i class="fa fa-file"></i>Category</h1>
+            <p>Category List</p>
         </div>
-        <a href="{{ route('admin.event.create') }}" class="btn btn-primary pull-right">Add New</a>
+        <a href="{{ route('admin.category.create') }}" class="btn btn-primary pull-right">Add New</a>
     </div>
     @include('admin.partials.flash')
     <div class="row">
@@ -21,26 +21,22 @@
                             <tr>
                                 <th>Sl No.</th>
                                 <th> Title </th>
-                                <th> Start date </th>
-                                <th> End date </th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($events as $key => $event)
-                               <tr>
-                                    <td>{{ $key +1  }}</td>
-                                    <td>{{ $event->title }}</td>
-                                    <td>{{ date('d-M-y',strtotime($event->start_date)) }}</td>
-                                    <td>{{ date('d-M-y',strtotime($event->end_date)) }}</td>
+                            @foreach ($categories as $key => $category)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $category->name }}</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ url('admin/event/edit', $event['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('admin/category/edit', $category['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                             {{-- <a href="{{ route('admin.interest.details', $interest['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a> --}}
-                                             <a href="javascript: void(0)" data-id="{{$event['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                             <a href="javascript: void(0)" data-id="{{$category['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
-                               </tr>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -57,7 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
     <script type="text/javascript">
     $('.sa-remove').on("click",function(){
-        var eventId = $(this).data('id');
+        var categoryId = $(this).data('id');
         swal({
           title: "Are you sure?",
           text: "You will not be able to recover the record!",
@@ -69,7 +65,7 @@
         },
         function(isConfirm){
           if (isConfirm) {
-            window.location.href = "event/delete/"+eventId;
+            window.location.href = "category/delete/"+categoryId;
             } else {
               swal("Cancelled", "Record is safe", "error");
             }

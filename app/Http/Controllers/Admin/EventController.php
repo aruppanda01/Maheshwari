@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class EventController extends Controller
+class EventController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -53,8 +54,7 @@ class EventController extends Controller
         $new_event->description = $request->description;
         $new_event->image = imageUpload($request->image, 'events');
         $new_event->save();
-
-        return redirect()->route('admin.event.store')->with('Success','Event added successfully');
+        return $this->responseRedirect('admin.event.index', 'Event has been created successfully', 'success', false, false);
     }
 
     /**
@@ -110,7 +110,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->image = $imageName;
         $event->save();
-        return redirect()->route('admin.event.index')->with('success','Event update successfully');
+        return $this->responseRedirect('admin.event.index', 'Event update successfully', 'success', false, false);
     }
 
     /**
@@ -121,6 +121,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Event::find($id)->delete();
+        return $this->responseRedirect('admin.event.index', 'Event deleted successfully', 'success', false, false);
     }
 }

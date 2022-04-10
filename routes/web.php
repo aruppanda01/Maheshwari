@@ -57,6 +57,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/event/store', [App\Http\Controllers\Admin\EventController::class, 'store'])->name('event.store');
         Route::get('/event/edit/{id}', [App\Http\Controllers\Admin\EventController::class, 'edit'])->name('event.edit');
         Route::post('/event/update/{id}', [App\Http\Controllers\Admin\EventController::class, 'update'])->name('event.update');
+        Route::get('/event/delete/{id}', [App\Http\Controllers\Admin\EventController::class, 'destroy'])->name('event.delete');
+
+        // ---------------Category--------------------
+        Route::get('/category', [App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category.index');
+        Route::get('/category/create', [App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('category.create');
+        Route::post('/category/store', [App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('category.store');
+        Route::get('/category/edit/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('/category/update/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
+        Route::get('/category/delete/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('category.delete');
     });
 
 });

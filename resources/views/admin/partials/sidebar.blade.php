@@ -17,6 +17,11 @@
                 <span class="app-menu__label">Events</span>
             </a>
         </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/category*') ? 'active' : '' }}" href="{{ route('admin.category.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Category</span>
+            </a>
+        </li>
 
     </ul>
 </aside>
