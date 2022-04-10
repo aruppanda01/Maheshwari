@@ -8,6 +8,6 @@ class Category extends Model
 {
     public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->hasMany(Photo::class);
     }
 }

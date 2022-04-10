@@ -66,6 +66,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/edit/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category.edit');
         Route::post('/category/update/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
         Route::get('/category/delete/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('category.delete');
+
+        // ---------------Category--------------------
+        Route::get('/photo', [App\Http\Controllers\Admin\PhotosController::class, 'index'])->name('photo.index');
+        Route::get('/photo/create', [App\Http\Controllers\Admin\PhotosController::class, 'create'])->name('photo.create');
+        Route::post('/photo/store', [App\Http\Controllers\Admin\PhotosController::class, 'store'])->name('photo.store');
+        Route::get('/photo/edit/{id}', [App\Http\Controllers\Admin\PhotosController::class, 'edit'])->name('photo.edit');
+        Route::post('/photo/update/{id}', [App\Http\Controllers\Admin\PhotosController::class, 'update'])->name('photo.update');
+        Route::get('/photo/delete/{id}', [App\Http\Controllers\Admin\PhotosController::class, 'destroy'])->name('photo.delete');
     });
 
 });

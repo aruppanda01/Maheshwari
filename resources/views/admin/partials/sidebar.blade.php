@@ -22,6 +22,11 @@
                 <span class="app-menu__label">Category</span>
             </a>
         </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/photo*') ? 'active' : '' }}" href="{{ route('admin.photo.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Photo</span>
+            </a>
+        </li>
 
     </ul>
 </aside>
