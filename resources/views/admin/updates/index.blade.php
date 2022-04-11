@@ -1,12 +1,12 @@
 @extends('admin.app')
-@section('title') Category @endsection
+@section('title') Update @endsection
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-file"></i>Category</h1>
-            <p>Category List</p>
+            <h1><i class="fa fa-file"></i>Update</h1>
+            <p>Updates List</p>
         </div>
-        <a href="{{ route('admin.category.create') }}" class="btn btn-primary pull-right">Add New</a>
+        <a href="{{ route('admin.update.create') }}" class="btn btn-primary pull-right">Add New</a>
     </div>
     @include('admin.partials.flash')
     <div class="row">
@@ -20,22 +20,22 @@
                         <thead>
                             <tr>
                                 <th>Sl No.</th>
-                                <th> Title </th>
-                                <th> Image</th>
+                                <th> Image </th>
+                                <th> Upload date</th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $key => $category)
+                            @foreach ($updates as $key => $update)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td><img src="{{ asset($category->file_path) }}" alt="" width="250" height="100"></td>
+                                    <td><img src="{{ asset($update->file_path) }}" alt="" width="250" height="100"></td>
+                                    <td>{{ date('d-M-y',strtotime($update->created_at)) }}</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ url('admin/category/edit', $category['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('admin/update/edit', $update['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                             {{-- <a href="{{ route('admin.interest.details', $interest['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a> --}}
-                                             <a href="javascript: void(0)" data-id="{{$category['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                             <a href="javascript: void(0)" data-id="{{$update['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -55,7 +55,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
     <script type="text/javascript">
     $('.sa-remove').on("click",function(){
-        var categoryId = $(this).data('id');
+        var updateId = $(this).data('id');
         swal({
           title: "Are you sure?",
           text: "You will not be able to recover the record!",
@@ -67,7 +67,7 @@
         },
         function(isConfirm){
           if (isConfirm) {
-            window.location.href = "category/delete/"+categoryId;
+            window.location.href = "update/delete/"+updateId;
             } else {
               swal("Cancelled", "Record is safe", "error");
             }

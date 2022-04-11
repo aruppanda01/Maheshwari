@@ -19,27 +19,19 @@
                     <table class="table table-hover custom-data-table-style table-striped" id="sampleTable">
                         <thead>
                             <tr>
-                                <th>Sl No.</th>
-                                <th> Title </th>
-                                <th> Image</th>
+                                <th> Terms </th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $key => $category)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td><img src="{{ asset($category->file_path) }}" alt="" width="250" height="100"></td>
+                                    <td>{!! $terms->content !!}</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ url('admin/category/edit', $category['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                            {{-- <a href="{{ route('admin.interest.details', $interest['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a> --}}
-                                             <a href="javascript: void(0)" data-id="{{$category['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ url('admin/terms/edit', $terms['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>

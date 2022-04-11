@@ -27,6 +27,26 @@
                 <span class="app-menu__label">Photo</span>
             </a>
         </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/update*') ? 'active' : '' }}" href="{{ route('admin.update.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Updates</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/governor*') ? 'active' : '' }}" href="{{ route('admin.governor.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Governing Bodies</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/contact-us*') ? 'active' : '' }}" href="{{ route('admin.contact.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Contact Us</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/terms*') ? 'active' : '' }}" href="{{ route('admin.terms.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Terms</span>
+            </a>
+        </li>
 
     </ul>
 </aside>

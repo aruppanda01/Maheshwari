@@ -67,13 +67,41 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/category/update/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
         Route::get('/category/delete/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('category.delete');
 
-        // ---------------Category--------------------
+        // ---------------Photo--------------------
         Route::get('/photo', [App\Http\Controllers\Admin\PhotosController::class, 'index'])->name('photo.index');
         Route::get('/photo/create', [App\Http\Controllers\Admin\PhotosController::class, 'create'])->name('photo.create');
         Route::post('/photo/store', [App\Http\Controllers\Admin\PhotosController::class, 'store'])->name('photo.store');
         Route::get('/photo/edit/{id}', [App\Http\Controllers\Admin\PhotosController::class, 'edit'])->name('photo.edit');
         Route::post('/photo/update/{id}', [App\Http\Controllers\Admin\PhotosController::class, 'update'])->name('photo.update');
         Route::get('/photo/delete/{id}', [App\Http\Controllers\Admin\PhotosController::class, 'destroy'])->name('photo.delete');
+
+        // --------------Updates------------------------
+        Route::get('/update', [App\Http\Controllers\Admin\UpdatesController::class, 'index'])->name('update.index');
+        Route::get('/update/create', [App\Http\Controllers\Admin\UpdatesController::class, 'create'])->name('update.create');
+        Route::post('/update/store', [App\Http\Controllers\Admin\UpdatesController::class, 'store'])->name('update.store');
+        Route::get('/update/edit/{id}', [App\Http\Controllers\Admin\UpdatesController::class, 'edit'])->name('update.edit');
+        Route::post('/update/update/{id}', [App\Http\Controllers\Admin\UpdatesController::class, 'update'])->name('update.update');
+        Route::get('/update/delete/{id}', [App\Http\Controllers\Admin\UpdatesController::class, 'destroy'])->name('update.delete');
+
+        // --------------Governing Body------------------------
+        Route::get('/governor', [App\Http\Controllers\Admin\GoverningController::class, 'index'])->name('governor.index');
+        Route::get('/governor/create', [App\Http\Controllers\Admin\GoverningController::class, 'create'])->name('governor.create');
+        Route::post('/governor/store', [App\Http\Controllers\Admin\GoverningController::class, 'store'])->name('governor.store');
+        Route::get('/governor/edit/{id}', [App\Http\Controllers\Admin\GoverningController::class, 'edit'])->name('governor.edit');
+        Route::post('/governor/update/{id}', [App\Http\Controllers\Admin\GoverningController::class, 'update'])->name('governor.update');
+        Route::get('/governor/delete/{id}', [App\Http\Controllers\Admin\GoverningController::class, 'destroy'])->name('governor.delete');
+
+        // -------------Contact us------------------------------------
+        Route::get('/contact-us', [App\Http\Controllers\Admin\ContactUsController::class, 'index'])->name('contact.index');
+        Route::get('/contact-us/create', [App\Http\Controllers\Admin\ContactUsController::class, 'create'])->name('contact.create');
+        Route::post('/contact-us/store', [App\Http\Controllers\Admin\ContactUsController::class, 'store'])->name('contact.store');
+        Route::get('/contact-us/edit/{id}', [App\Http\Controllers\Admin\ContactUsController::class, 'edit'])->name('contact.edit');
+        Route::post('/contact-us/update/{id}', [App\Http\Controllers\Admin\ContactUsController::class, 'update'])->name('contact.update');
+        
+        // ------------Setting------------------------------------
+        Route::get('/terms',[App\Http\Controllers\Admin\TermsController::class, 'index'])->name('terms.index');
+        Route::get('/terms/edit/{id}',[App\Http\Controllers\Admin\TermsController::class, 'edit'])->name('terms.edit');
+        Route::post('/terms/update/{id}', [App\Http\Controllers\Admin\TermsController::class, 'update'])->name('terms.update');
     });
 
 });
