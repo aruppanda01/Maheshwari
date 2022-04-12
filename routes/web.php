@@ -102,6 +102,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/terms',[App\Http\Controllers\Admin\TermsController::class, 'index'])->name('terms.index');
         Route::get('/terms/edit/{id}',[App\Http\Controllers\Admin\TermsController::class, 'edit'])->name('terms.edit');
         Route::post('/terms/update/{id}', [App\Http\Controllers\Admin\TermsController::class, 'update'])->name('terms.update');
+
+        Route::get('/privacy',[App\Http\Controllers\Admin\PrivacyController::class, 'index'])->name('privacy.index');
+        Route::get('/privacy/edit/{id}',[App\Http\Controllers\Admin\PrivacyController::class, 'edit'])->name('privacy.edit');
+        Route::post('/privacy/update/{id}', [App\Http\Controllers\Admin\PrivacyController::class, 'update'])->name('privacy.update');
+
+        // ---------------FAQ--------------------------------------------
+        Route::get('/faq', [App\Http\Controllers\Admin\FAQController::class, 'index'])->name('faq.index');
+        Route::get('/faq/create', [App\Http\Controllers\Admin\FAQController::class, 'create'])->name('faq.create');
+        Route::post('/faq/store', [App\Http\Controllers\Admin\FAQController::class, 'store'])->name('faq.store');
+        Route::get('/faq/edit/{id}', [App\Http\Controllers\Admin\FAQController::class, 'edit'])->name('faq.edit');
+        Route::post('/faq/update/{id}', [App\Http\Controllers\Admin\FAQController::class, 'update'])->name('faq.update');
+        Route::get('/faq/delete/{id}', [App\Http\Controllers\Admin\FAQController::class, 'destroy'])->name('faq.delete');
+
     });
 
 });

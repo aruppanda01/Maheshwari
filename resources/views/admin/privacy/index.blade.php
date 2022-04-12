@@ -1,9 +1,9 @@
 @extends('admin.app')
-@section('title') Terms and Condition @endsection
+@section('title') Privacy @endsection
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-file"></i>Terms and Condition</h1>
+            <h1><i class="fa fa-file"></i>Privacy</h1>
             {{-- <p>Category List</p> --}}
         </div>
         {{-- <a href="{{ route('admin.category.create') }}" class="btn btn-primary pull-right">Add New</a> --}}
@@ -19,16 +19,16 @@
                     <table class="table table-hover custom-data-table-style table-striped" id="sampleTable">
                         <thead>
                             <tr>
-                                <th> Terms </th>
+                                <th> Privacy </th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                                 <tr>
-                                    <td>{!! $terms->content !!}</td>
+                                    <td>{!! $privacy->content !!}</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ url('admin/terms/edit', $terms['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('admin/privacy/edit', $privacy['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                         </div>
                                     </td>
                                 </tr>

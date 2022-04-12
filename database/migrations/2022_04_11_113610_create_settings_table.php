@@ -19,6 +19,20 @@ class CreateSettingsTable extends Migration
             $table->longText('content');
             $table->timestamps();
         });
+        $data[] = [
+            'page_title' => 'terms',
+            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+        $data[] = [
+            'page_title' => 'privacy',
+            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+        DB::table('settings')->insert($data);
+
     }
 
     /**

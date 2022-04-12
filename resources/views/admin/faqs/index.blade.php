@@ -1,12 +1,12 @@
 @extends('admin.app')
-@section('title') Terms and Condition @endsection
+@section('title') FAQs @endsection
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-file"></i>Terms and Condition</h1>
+            <h1><i class="fa fa-file"></i>FAQs</h1>
             {{-- <p>Category List</p> --}}
         </div>
-        {{-- <a href="{{ route('admin.category.create') }}" class="btn btn-primary pull-right">Add New</a> --}}
+        <a href="{{ route('admin.faq.create') }}" class="btn btn-primary pull-right">Add New</a>
     </div>
     @include('admin.partials.flash')
     <div class="row">
@@ -19,19 +19,23 @@
                     <table class="table table-hover custom-data-table-style table-striped" id="sampleTable">
                         <thead>
                             <tr>
-                                <th> Terms </th>
+                                <th>Sl No</th>
+                                <th> Question </th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                                <tr>
-                                    <td>{!! $terms->content !!}</td>
-                                    <td class="text-center">
-                                        <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ url('admin/terms/edit', $terms['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($faqs as $key => $faq)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $faq->question }}</td>
+                                        <td class="text-center">
+                                            <div class="btn-group" role="group" aria-label="Second group">
+                                                <a href="{{ url('admin/faq/edit', $faq['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>

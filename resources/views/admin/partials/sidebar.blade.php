@@ -44,7 +44,17 @@
         </li>
         <li>
             <a class="app-menu__item event {{ request()->is('admin/terms*') ? 'active' : '' }}" href="{{ route('admin.terms.index') }}"><i class="app-menu__icon fa fa-group"></i>
-                <span class="app-menu__label">Terms</span>
+                <span class="app-menu__label">Terms and Condition</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/privacy*') ? 'active' : '' }}" href="{{ route('admin.privacy.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">Privacy</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item event {{ request()->is('admin/faq*') ? 'active' : '' }}" href="{{ route('admin.faq.index') }}"><i class="app-menu__icon fa fa-group"></i>
+                <span class="app-menu__label">FAQs</span>
             </a>
         </li>
 
