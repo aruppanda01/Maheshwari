@@ -89,7 +89,7 @@ class PhotosController extends BaseController
     {
         $this->validate($request, [
             'category' => 'required|integer',
-            'image' => 'required|image|mimes:jpeg,png,jpg',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
         $photo = Photo::find($id);

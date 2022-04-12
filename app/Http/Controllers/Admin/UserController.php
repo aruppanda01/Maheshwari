@@ -95,6 +95,9 @@ class UserController extends BaseController
         $user->email = $request->email;
         $user->mobile_mo = $request->mobile_mo;
         $user->status = 0;
+        $user->is_head_of_the_family = $request->family_head;
+        $user->occupation = $request->occupation;
+        $user->occupation_sector = $request->occupation_sector;
         $user->save();
 
         return $this->responseRedirect('admin.user.index', 'User has been created successfully', 'success', false, false);
@@ -200,6 +203,9 @@ class UserController extends BaseController
         $user->pin_code = $request->pin_code;
         $user->email = $request->email;
         $user->mobile_mo = $request->mobile_mo;
+        $user->is_head_of_the_family = $request->family_head;
+        $user->occupation = $request->occupation;
+        $user->occupation_sector = $request->occupation_sector;
         $user->save();
         return $this->responseRedirect('admin.user.index', 'User details has been updated successfully', 'success', false, false);
     }

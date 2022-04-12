@@ -67,3 +67,10 @@ Route::post('/image/upload', [App\Http\Controllers\Api\ImageController::class, '
 
 // -----------------Notification----------------------
 Route::get('/notification/{id}', [App\Http\Controllers\Api\NotificationController::class, 'userWiseNotification']);
+
+// -----------------Terms & Condition,privacy,faqs,contact_us--------------------------
+Route::get('/terms', [App\Http\Controllers\Api\SettingController::class, 'getTerms']);
+Route::get('/privacy', [App\Http\Controllers\Api\SettingController::class, 'getPrivacy']);
+Route::get('/faqs', [App\Http\Controllers\Api\SettingController::class, 'getFAQ']);
+Route::get('/contact', [App\Http\Controllers\Api\SettingController::class, 'getContact']);
+

@@ -142,6 +142,30 @@ User
                             @error('email') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
+                    <div class="tile-body">
+                        <div class="form-group">
+                            <label class="control-label" for="occupation">Occupation</label>
+                            <input class="form-control @error('occupation') is-invalid @enderror" type="text" name="occupation" id="occupation" value="{{ old('occupation') }}"/>
+                            @error('occupation') {{ $message ?? '' }} @enderror
+                        </div>
+                    </div>
+                    <div class="tile-body">
+                        <div class="form-group">
+                            <label class="control-label" for="occupation_sector">Occupation Sector</label>
+                            <input class="form-control @error('occupation_sector') is-invalid @enderror" type="text" name="occupation_sector" id="occupation_sector" value="{{ old('occupation_sector') }}"/>
+                            @error('occupation_sector') {{ $message ?? '' }} @enderror
+                        </div>
+                    </div>
+                    <div class="tile-body">
+                        <div class="form-group">
+                            <label class="control-label" for="email">Is head of the family?</label>
+                            <select name="family_head" id="family_head" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                            @error('family_head') {{ $message ?? '' }} @enderror
+                        </div>
+                    </div>
                      {{-- <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="password">Password <span class="m-l-5 text-danger"> *</span></label>

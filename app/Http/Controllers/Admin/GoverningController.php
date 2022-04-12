@@ -111,7 +111,12 @@ class GoverningController extends BaseController
 
         $governing = GoverningBody::find($id);
         $governing->name = $request->name;
-        $governing->file_path = imageUpload($request->image, 'governing_bodies');
+        if ($request->image) {
+            $governing->file_path = imageUpload($request->image, 'governing_bodies');
+        }else{
+            $governing->file_path = $governing->file_path;
+        }
+        
         $governing->designation = $request->designation;
         $governing->email = $request->email;
         $governing->mobile_no = $request->mobile_no;
