@@ -80,10 +80,37 @@
                             @error('qualification') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
-                     <div class="tile-body">
+                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="blood_group">Blood Group</label>
-                            <input class="form-control @error('blood_group') is-invalid @enderror" type="text" name="blood_group" id="blood_group" value="{{ $user->blood_group }}"/>
+                            <select name="blood_group" id="blood_group" class="form-control @error('blood_group') is-invalid @enderror">
+                                <option value="">Select blood group</option>
+                                <option value="O+" @if ($user->blood_group == 'O+')
+                                    selected
+                                @endif>O+</option>
+                                <option value="O-" @if ($user->blood_group == 'O-')
+                                    selected
+                                @endif>O-</option>
+                                <option value="A+" @if ($user->blood_group == 'A+')
+                                    selected
+                                @endif>A+</option>
+                                <option value="A-" @if ($user->blood_group == 'A-')
+                                    selected
+                                @endif>A-</option>
+                                <option value="B+" @if ($user->blood_group == 'B+')
+                                    selected
+                                @endif>B+</option>
+                                <option value="B-" @if ($user->blood_group == 'B-')
+                                    selected
+                                @endif>B-</option>
+                                <option value="AB+" @if ($user->blood_group == 'AB+')
+                                    selected
+                                @endif>AB+</option>
+                                <option value="AB-" @if ($user->blood_group == 'AB-')
+                                    selected
+                                @endif>AB-</option>
+                            </select>
+                            {{-- <input class="form-control @error('blood_group') is-invalid @enderror" type="text" name="blood_group" id="blood_group" value="{{ old('blood_group') }}"/> --}}
                             @error('blood_group') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
