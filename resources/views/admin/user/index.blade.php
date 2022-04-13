@@ -2,11 +2,16 @@
 @section('title') User @endsection
 @section('content')
     <div class="app-title">
-        <div>
-            <h1><i class="fa fa-file"></i>User</h1>
-            <p>User List</p>
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h1><i class="fa fa-file"></i>User</h1>
+                <p>User List</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Add New</a>
+                <a href="#csvModal" data-toggle="modal" class="btn btn-primary">CSV import</a>
+            </div>
         </div>
-        <a href="{{ route('admin.user.create') }}" class="btn btn-primary pull-right">Add New</a>
     </div>
     @include('admin.partials.flash')
     <div class="row">
@@ -53,7 +58,26 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="csvModal" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="mb-0">CSV upload users</h5>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.user.import') }}" method="post" enctype="multipart/form-data">@csrf
+                        <input type="file" name="file" id="file" class="form-control" accept=".csv">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-sm">Upload <i class="fa fa-upload"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
 @push('scripts')
     <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>

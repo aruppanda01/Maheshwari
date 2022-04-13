@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public static function insertData($data) {
+        $value = DB::table('users')->where('member_name', $data['member_name'])->get();
+        if($value->count() == 0) {
+           DB::table('users')->insert($data);
+        }
+    }
 }

@@ -221,4 +221,91 @@ class UserController extends BaseController
         User::where('id', $id)->delete();
         return $this->responseRedirect('admin.user.index', 'User has been deleted successfully', 'success', false, false);
     }
+
+    // csv upload
+    public function csvImport(Request $request)
+    {
+        if (!empty($request->file)) {
+            // if ($request->input('submit') != null ) {
+            $file = $request->file('file');
+            // File Details
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+
+            // Valid File Extensions
+            $valid_extension = array("csv");
+            // 50MB in Bytes
+            $maxFileSize = 50097152;
+            // Check file extension
+            if (in_array(strtolower($extension), $valid_extension)) {
+                // Check file size
+                if ($fileSize <= $maxFileSize) {
+                    // File upload location
+                    $location = 'uploads/csv';
+                    // Upload file
+                    $file->move($location, $filename);
+                    // Import CSV to Database
+                    $filepath = public_path($location . "/" . $filename);
+                    // Reading file
+                    $file = fopen($filepath, "r");
+                    $importData_arr = array();
+                    $i = 0;
+                    while (($filedata = fgetcsv($file, 10000, ",")) !== FALSE) {
+                        $num = count($filedata);
+                        // Skip first row
+                        if ($i == 0) {
+                            $i++;
+                            continue;
+                        }
+                        for ($c = 0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata[$c];
+                        }
+                        $i++;
+                    }
+                    fclose($file);
+
+                    // echo '<pre>';print_r($importData_arr);exit();
+
+                    // Insert into database
+                    foreach ($importData_arr as $importData) {
+                        // $storeData = 0;
+                        // if(isset($importData[5]) == "Carry In") $storeData = 1;
+
+                        $insertData = array(
+                            "pkms_no" => isset($importData[0]) ? $importData[0] : null,
+                            "abvp_no" => isset($importData[1]) ? $importData[1] : null,
+                            "member_name" => isset($importData[2]) ? $importData[2] : null,
+                            "father_or_husband_name" => isset($importData[3]) ? $importData[3] : null,
+                            "gender" => isset($importData[4]) ? $importData[4] : null,
+                            "dob" => isset($importData[5]) ? date('Y-m-d',strtotime($importData[5])) : null,
+                            "aadhar_no" => isset($importData[6]) ? $importData[6] : null,
+                            "qualification" => isset($importData[7]) ? $importData[7] : null,
+                            "blood_group" => isset($importData[8]) ? $importData[8] : null,
+                            "address" => isset($importData[9]) ? $importData[9] : null,
+                            "city" => isset($importData[10]) ? $importData[10] : null,
+                            "pin_code" => isset($importData[11]) ? $importData[11] : null,
+                            "mobile_mo" => isset($importData[12]) ? $importData[12] : null,
+                            "email" => isset($importData[13]) ? $importData[13] : null,
+                            "password" => Hash::make('123')
+                        );
+                        // echo '<pre>';print_r($insertData);exit();
+                        User::insertData($insertData);
+                    }
+                    Session::flash('message', 'Import Successful.');
+                } else {
+                    Session::flash('message', 'File too large. File must be less than 50MB.');
+                }
+            } else {
+                Session::flash('message', 'Invalid File Extension. supported extensions are ' . implode(', ', $valid_extension));
+            }
+        } else {
+            Session::flash('message', 'No file found.');
+        }
+
+        return redirect()->route('user.product.data.list');
+    }
+    // csv upload
 }

@@ -50,6 +50,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/user/update/{id}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('user.update');
         Route::get('/user/delete/{id}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('user.delete');
         Route::post('/user/updateStatus', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
+        Route::post('/user/import', [App\Http\Controllers\Admin\UserController::class, 'csvImport'])->name('user.import');
 
         // ---------------Event---------------------
         Route::get('/event', [App\Http\Controllers\Admin\EventController::class, 'index'])->name('event.index');
