@@ -270,7 +270,7 @@ class UserController extends BaseController
                     // echo '<pre>';print_r($importData_arr);exit();
 
                     // Insert into database
-                    foreach ($importData_arr as $importData) {
+                    foreach ($importData_arr as $key => $importData) {
                         // $storeData = 0;
                         // if(isset($importData[5]) == "Carry In") $storeData = 1;
 
@@ -281,16 +281,19 @@ class UserController extends BaseController
                             "father_or_husband_name" => isset($importData[3]) ? $importData[3] : null,
                             "gender" => isset($importData[4]) ? $importData[4] : null,
                             "dob" => isset($importData[5]) ? date('Y-m-d',strtotime($importData[5])) : null,
-                            "aadhar_no" => isset($importData[6]) ? $importData[6] : null,
-                            "qualification" => isset($importData[7]) ? $importData[7] : null,
-                            "blood_group" => isset($importData[8]) ? $importData[8] : null,
-                            "address" => isset($importData[9]) ? $importData[9] : null,
-                            "city" => isset($importData[10]) ? $importData[10] : null,
-                            "pin_code" => isset($importData[11]) ? $importData[11] : null,
-                            "mobile_mo" => isset($importData[12]) ? $importData[12] : null,
-                            "email" => isset($importData[13]) ? $importData[13] : null,
-                            "password" => Hash::make('123')
+                            "ma" => isset($importData[6]) ? date('Y-m-d',strtotime($importData[6])) : null,
+                            "aadhar_no" => isset($importData[7]) ? $importData[7] : null,
+                            "qualification" => isset($importData[8]) ? $importData[8] : null,
+                            "blood_group" => isset($importData[9]) ? $importData[9] : null,
+                            "address" => isset($importData[10]) ? $importData[10] : null,
+                            "city" => isset($importData[11]) ? $importData[11] : null,
+                            "pin_code" => isset($importData[12]) ? $importData[12] : null,
+                            "mobile_mo" => isset($importData[13]) ? $importData[13] : null,
+                            "email" => isset($importData[14]) ? $importData[14] : null,
+                            "password" => Hash::make('123'),
+                            "status" => 0
                         );
+                        set_time_limit($key);
                         // echo '<pre>';print_r($insertData);exit();
                         User::insertData($insertData);
                     }
